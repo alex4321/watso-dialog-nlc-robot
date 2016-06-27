@@ -40,8 +40,10 @@ class WatsonConversation (val robot: WatsonRobot) {
                 if (part.length == 0) {
                     continue
                 }
-                if (part[part.length - 1] == ']') {
-                    val cmd = part.substring(0, part.length - 1).split(":")
+                if (part.indexOf(']') != -1) {
+                    val splittedPart = part.split(']')
+                    val cmdPart = splittedPart[0]
+                    val cmd = cmdPart.split(":")
                     val commandName = cmd[0]
                     val processedArgs = ArrayList<String>()
                     for (i in 1..cmd.size-1) {
@@ -54,6 +56,9 @@ class WatsonConversation (val robot: WatsonRobot) {
                         }
                     }
                     itemBuilder.append(CommandHandler.run(commandName, processedArgs, text))
+                    if (splittedPart.size == 2) {
+                        itemBuilder.append(splittedPart[1])
+                    }
                 } else {
                     itemBuilder.append(part)
                 }
