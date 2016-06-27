@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dialog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="WatsonDialogDocument_1.0.xsd">
+    <flow>
+        <folder label="Main">
+            <output>
+                <prompt selectionType="RANDOM">
+                    <item>Привет, я могу рассказать о погоде.</item>
+                </prompt>
+                <goto ref="introSearch" />
+            </output>
+            <output>
+                <prompt selectionType="RANDOM">
+                    <item>Пока.</item>
+                </prompt>
+                <getUserInput id="introSearch">
+                    <search ref="introSearchFolder" />
+                    <default>
+                        <output>
+                            <prompt selectionType="RANDOM">
+                                <item>Что?</item>
+                            </prompt>
+                        </output>
+                    </default>
+                </getUserInput>
+            </output>
+        </folder>
+        <folder label="Library">
+            <folder id="introSearchFolder" label="Live Content">
+                <input>
+                    <grammar>
+                        <item>[temperature] *</item>
+                    </grammar>
+
+                    <input>
+                        <grammar>
+                            <item>$ (City)={City}</item>
+                        </grammar>
+                        <output>
+                            <prompt selectionType="SEQUENTIAL">
+                                <item>Ок, я обработал запрос. Температура - [Temperature:$City]</item>
+                            </prompt>
+                        </output>
+                    </input>
+                    <input>
+                        <grammar>
+                            <item>*</item>
+                        </grammar>
+                        <output>
+                            <prompt selectionType="SEQUENTIAL">
+                                <item>Напиши город.</item>
+                            </prompt>
+                            <getUserInput id="temperatureCitySelectionInput">
+                                <search ref="temperatureCitySelectionSearch" />
+                                <default>
+                                    <output>
+                                        <prompt selectionType="RANDOM">
+                                            <item>Что?</item>
+                                        </prompt>
+                                    </output>
+                                </default>
+                            </getUserInput>
+                        </output>
+                    </input>
+                </input>
+
+                <input>
+                    <grammar>
+                        <item>[conditions] *</item>
+                    </grammar>
+
+                    <input>
+                        <grammar>
+                            <item>$ (City)={City}</item>
+                        </grammar>
+                        <output>
+                            <prompt selectionType="SEQUENTIAL">
+                                <item>Ок, я обработал запрос. Условия : [Conditions:$City]</item>
+                            </prompt>
+                        </output>
+                    </input>
+                    <input>
+                        <grammar>
+                            <item>*</item>
+                        </grammar>
+                        <output>
+                            <prompt selectionType="SEQUENTIAL">
+                                <item>Напиши город.</item>
+                            </prompt>
+                            <getUserInput id="conditionsCitySelectionInput">
+                                <search ref="conditionsCitySelectionSearch" />
+                                <default>
+                                    <output>
+                                        <prompt selectionType="RANDOM">
+                                            <item>Что?</item>
+                                        </prompt>
+                                    </output>
+                                </default>
+                            </getUserInput>
+                        </output>
+                    </input>
+                </input>
+            </folder>
+
+            <folder id="temperatureCitySelectionSearch" label="Live Content">
+                <input>
+                    <grammar>
+                        <item>$ (City)={City}</item>
+                    </grammar>
+                    <output>
+                        <prompt selectionType="SEQUENTIAL">
+                            <item>Ок, я обработал запрос. Температура - [Temperature:$City]</item>
+                        </prompt>
+                    </output>
+                </input>
+            </folder>
+
+            <folder id="conditionsCitySelectionSearch" label="Live Content">
+                <input>
+                    <grammar>
+                        <item>$ (City)={City}</item>
+                    </grammar>
+                    <output>
+                        <prompt selectionType="SEQUENTIAL">
+                            <item>Ок, я обработал запрос. Условия : [Conditions:$City]</item>
+                        </prompt>
+                    </output>
+                </input>
+            </folder>
+        </folder>
+        <folder label="Global" />
+        <folder label="Concepts" />
+    </flow>
+    <entities>
+        <entity name="City">
+            <value name="Tokyo" value="Tokyo">
+                <grammar>
+                    <item>Токио</item>
+                </grammar>
+            </value>
+            <value name="Moscow" value="Moscow">
+                <grammar>
+                    <item>Москва</item>
+                </grammar>
+            </value>
+        </entity>
+    </entities>
+    <variables>
+        <var_folder name="Home">
+            <var name="City" type="TEXT" />
+        </var_folder>
+    </variables>
+    <settings />
+    <specialSettings />
+    <classes>
+        <class name="temperature">
+            <item>Как тепло это сегодня?</item>
+            <item>Жарко?</item>
+            <item>Будет жарко?</item>
+            <item>Будет душно?</item>
+            <item>Как холодно сегодня?</item>
+            <item>Холодно?</item>
+            <item>Какую температуру ждать?</item>
+            <item>Ожидаемая тепмпература?</item>
+            <item>Will high temperatures be dangerous?</item>
+            <item>Будет холодно?</item>
+            <item>Сейчас не холодно?</item>
+            <item>Будет тепло?</item>
+            <item>Какая температур по Цельсию?</item>
+            <item>Какая температура по Фаренгейту?</item>
+        </class>
+        <class name="conditions">
+            <item>Ветрено?</item>
+            <item>Будет дождь?</item>
+            <item>Вероятен дождь?</item>
+            <item>Будет снег?</item>
+            <item>Будет солнечно?</item>
+            <item>Будут осадки?</item>
+            <item>Облачно?</item>
+            <item>Будет сильный дождь?</item>
+            <item>How much snow are we expecting?</item>
+            <item>Будет снегопад?</item>
+            <item>Сильный ветер?</item>
+            <item>Ожидают снегопад?</item>
+            <item>Когда закончится дождь?</item>
+            <item>Сейчас солнечно?</item>
+            <item>Будет дождь?</item>
+            <item>Сильный ветер?</item>
+            <item>Будет сухо?</item>
+            <item>Будет прохладно?</item>
+            <item>Будет влажно?</item>
+            <item>Ожидаемая влажность?</item>
+        </class>
+    </classes>
+</dialog>
