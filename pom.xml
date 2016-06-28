@@ -29,26 +29,6 @@
             <artifactId>java-sdk</artifactId>
             <version>3.0.1</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-core -->
-        <!--<dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-core</artifactId>
-            <version>3.3.0</version>
-        </dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/io.vertx/vertx-web -->
-        <!--<dependency>
-            <groupId>io.vertx</groupId>
-            <artifactId>vertx-web</artifactId>
-            <version>3.3.0</version>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.7</version>
-        </dependency>-->
     </dependencies>
 
     <build>
