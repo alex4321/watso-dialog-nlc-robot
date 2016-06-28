@@ -13,7 +13,7 @@ It adds "classes" element and you can use it in input grammars. E.g.
     ...
         <input>
             <grammar>
-                <item> temperature (City)=${City} </item>
+                <item> [temperature] (City)=${City} </item>
             </grammar>
         </input>
     ...
