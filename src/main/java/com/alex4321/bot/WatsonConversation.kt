@@ -6,8 +6,8 @@ import com.ibm.watson.developer_cloud.natural_language_classifier.v1.NaturalLang
 import java.util.*
 
 class WatsonConversation (val robot: WatsonRobot) : IConversation {
-    var id: Int = 0
-    var clientID: Int = 0
+    override var id: Int = 0
+    override var clientID: Int = 0
 
     private fun dialog() : DialogService {
         val result = DialogService()

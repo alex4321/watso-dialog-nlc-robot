@@ -8,4 +8,16 @@ class TranslationConversation (private val translator: Translator, private val b
     override fun answer(text: String) : Answer {
         return backend.answer(translator.translate(text))
     }
+
+    override var id: Int
+        get() = backend.id
+        set(value) {
+            backend.id = value
+        }
+
+    override var clientID: Int
+        get() = backend.clientID
+        set(value) {
+            backend.clientID = value
+        }
 }
