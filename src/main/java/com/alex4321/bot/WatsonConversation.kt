@@ -5,7 +5,7 @@ import com.ibm.watson.developer_cloud.dialog.v1.model.Conversation
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.NaturalLanguageClassifier
 import java.util.*
 
-class WatsonConversation (val robot: WatsonRobot) {
+class WatsonConversation (val robot: WatsonRobot) : IConversation {
     var id: Int = 0
     var clientID: Int = 0
 
@@ -68,7 +68,7 @@ class WatsonConversation (val robot: WatsonRobot) {
         return result
     }
 
-    fun intro() : Answer {
+    override fun intro() : Answer {
         val conversation = dialog().createConversation(robot.dialogID).execute()
         id = conversation.id
         clientID = conversation.clientId
@@ -76,7 +76,7 @@ class WatsonConversation (val robot: WatsonRobot) {
         return Answer(processResponse(conversation.response, profile, ""), profile)
     }
 
-    fun answer(text: String) : Answer {
+    override fun answer(text: String) : Answer {
         val minConfidence = 0.6
         val classification = nlc().classify(robot.nlcID, text).execute()
         val classes = classification.classes
