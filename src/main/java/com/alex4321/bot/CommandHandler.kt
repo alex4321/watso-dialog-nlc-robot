@@ -1,5 +1,6 @@
 package com.alex4321.bot
 
+import org.apache.commons.lang3.StringUtils
 import java.util.*
 import java.util.function.BiFunction
 
@@ -16,7 +17,15 @@ class CommandHandler {
                 val handler = handlers[command] as BiFunction<List<String>, String, String>
                 return handler.apply(args, text)
             } else {
-                return command
+                val result = StringBuilder()
+                result.append('[')
+                result.append(command)
+                for (item in args) {
+                    result.append(':')
+                    result.append(item)
+                }
+                result.append(']')
+                return result.toString()
             }
         }
     }
