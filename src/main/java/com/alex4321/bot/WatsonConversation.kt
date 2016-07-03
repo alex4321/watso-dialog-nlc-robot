@@ -80,12 +80,14 @@ class WatsonConversation (val robot: WatsonRobot) : IConversation {
         val minConfidence = 0.6
         val classification = nlc().classify(robot.nlcID, text).execute()
         val classes = classification.classes
-        val textClassName = if (classes.size > 0 && classes[0].confidence >= minConfidence) {
-            classes[0].name
-        } else {
-            ""
+        val textClassNames = StringBuilder()
+        for (item in classes) {
+            if (item.confidence >= minConfidence) {
+                textClassNames.append(' ')
+                textClassNames.append(item.name)
+            }
         }
-        val dialogInput = textClassName + " " + text
+        val dialogInput = textClassNames.toString() + " " + text
         val conversation = Conversation()
         conversation.id = id
         conversation.dialogId = robot.dialogID
